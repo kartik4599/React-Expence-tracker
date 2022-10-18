@@ -1,13 +1,22 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import classes from "./SignUp.module.css";
 
 const SignUp = () => {
   const emailRef = useRef();
   const passRef = useRef();
   const confRef = useRef();
+  const history=useHistory();
+  const [isLoading, setLoading] = useState(false);
+
+    const onLogin=()=>{
+        history.replace('/Login');
+    }
+
 
   const sumbitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (passRef.current.value === confRef.current.value) {
       try {
         const res = await fetch(
@@ -36,9 +45,10 @@ const SignUp = () => {
       } catch (e) {
         console.log(e);
       }
-    }else{
-        alert("Incorrect Password");
+    } else {
+      alert("Incorrect Password");
     }
+    setLoading(false);
   };
 
   return (
@@ -63,10 +73,11 @@ const SignUp = () => {
           />
           <br />
           <button>Sign Up</button>
+          {isLoading && <p>Loading...</p>}
         </form>
       </div>
       <div className={classes.login}>
-        <p>Already Have an account ? Login</p>
+        <p onClick={onLogin}>Already Have an account ? Login</p>
       </div>
     </center>
   );
