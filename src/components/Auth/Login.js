@@ -71,7 +71,7 @@ const Login = () => {
       </div>
       {isLoading && <p>Loading...</p>}
       <div className={classes.login}>
-        <p onClick={onSign}>I don't have an account ? Login</p>
+        <p onClick={onSign}>I don't have an account ? SignUp</p>
       </div>
     </center>
   );
