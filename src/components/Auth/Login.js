@@ -1,5 +1,6 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
+import AuthContext from "../../Context/auth-context";
 import classes from "./SignUp.module.css";
 
 const Login = () => {
@@ -7,7 +8,7 @@ const Login = () => {
   const passRef = useRef();
   const history = useHistory();
   const [isLoading, setLoading] = useState(false);
-
+  const cxt=useContext(AuthContext);
 
   const onSign=()=>{
     history.replace('/SignUp');
@@ -34,12 +35,7 @@ const Login = () => {
 
       if (res.ok) {
         const data = await res.json();
-        const send = {
-          id: data.idToken,
-          email: emailRef.current.value,
-        };
-        localStorage.setItem("login", JSON.stringify(send));
-        console.log(send);
+        cxt.addId(data.idToken);
         history.replace("/Home");
       } else {
         const data = await res.json();
@@ -71,7 +67,7 @@ const Login = () => {
       </div>
       {isLoading && <p>Loading...</p>}
       <div className={classes.login}>
-        <p onClick={onSign}>I don't have an account ? SignUp</p>
+        <p onClick={onSign}>I don't have an account ? Login</p>
       </div>
     </center>
   );

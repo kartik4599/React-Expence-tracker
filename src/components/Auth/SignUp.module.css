@@ -17,7 +17,6 @@
 }
 
 .SignUp input {
-  width: 40%;
   margin: 15px;
   border: 1px solid rgb(194, 194, 194);
   padding: 10px 10px;
@@ -42,8 +41,8 @@
 
 .login {
   margin: 15px;
-  background: rgb(255, 216, 216);
-  color: red;
+  background: rgb(212, 255, 212);
+  color: green;
   cursor: pointer;
-  border: 1px solid rgb(255, 184, 184);
+  border: 1px solid rgb(194, 194, 194);
 }
