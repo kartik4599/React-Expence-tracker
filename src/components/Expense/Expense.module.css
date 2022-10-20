@@ -1,0 +1,36 @@
+.getForm {
+  width: 100%;
+  text-align: center;
+  margin: 50px 0px;
+  transition: 3s;
+}
+
+.getForm button {
+  padding: 15px 50px;
+  border: none;
+  margin: 10px;
+  transition: 0.5s;
+  border-radius: 10px;
+  color: white;
+  background: rgb(43, 160, 255);
+}
+
+.getForm button:hover {
+  border-radius: 40px;
+}
+
+.getForm span {
+  transition: 1s;
+  position: relative;
+  transform: translate(-50%, -50%);
+}
+
+.expenseList{
+    padding: 20px;
+}
+
+.expenseList span{
+    padding: 10px 40px;
+    font-weight: bold;
+    font-size: 30px;
+}

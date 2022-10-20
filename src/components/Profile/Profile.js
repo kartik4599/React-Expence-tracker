@@ -106,31 +106,31 @@ const Profile = () => {
   };
 
   return (
-    <div className={classes.profile}>
-      <div>
-        <h2>Contact Detail</h2>
-        <Link to="/Home">
-          <button> Cancle</button>
-        </Link>
+      <div className={classes.profile}>
+        <div>
+          <h2>Contact Detail</h2>
+          <Link to="/Home">
+            <button> Cancle</button>
+          </Link>
+        </div>
+        <span className={classes.verify}>
+          <button onClick={verifyHandler}>Verify Email</button>
+        </span>
+        <form onSubmit={submitHandler}>
+          <span>
+            <label>Full Name -</label>
+            <input ref={nameRef} type="text" required />
+          </span>
+          <span>
+            <label>Profile Photo Url -</label>
+            <input ref={photoRef} type="text" required />
+          </span>
+          <br />
+          <span>
+            <button>Submit</button>
+          </span>
+        </form>
       </div>
-      <span className={classes.verify}>
-        <button onClick={verifyHandler}>Verify Email</button>
-      </span>
-      <form onSubmit={submitHandler}>
-        <span>
-          <label>Full Name -</label>
-          <input ref={nameRef} type="text" required />
-        </span>
-        <span>
-          <label>Profile Photo Url -</label>
-          <input ref={photoRef} type="text" required />
-        </span>
-        <br />
-        <span>
-          <button>Submit</button>
-        </span>
-      </form>
-    </div>
   );
 };
 

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
+import Expense from '../Expense/Expense';
 import classes from './Home.module.css';
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div>
       <div className={classes.top}>
@@ -9,6 +10,9 @@ const Home = () => {
         <div className={classes.profile}>
             <p>Your Profile is incomplete <Link to={'/Profile'}><span>Complete Now</span></Link></p>
         </div>
+      </div>
+      <div>
+        <Expense />
       </div>
     </div>
   );

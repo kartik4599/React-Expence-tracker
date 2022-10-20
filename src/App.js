@@ -11,6 +11,7 @@ import AuthContext from "./Context/auth-context";
 
 function App() {
   const cxt = useContext(AuthContext);
+
   return (
     <div>
       <Header />
@@ -22,7 +23,7 @@ function App() {
         )}
         {cxt.isLogin && (
           <Route path={"/Profile"}>
-            <Profile/>
+            <Profile />
           </Route>
         )}
         {!cxt.isLogin && (
