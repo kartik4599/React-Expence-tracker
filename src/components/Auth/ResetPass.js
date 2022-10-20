@@ -1,31 +1,22 @@
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import AuthContext from "../../Context/auth-context";
 import classes from "./SignUp.module.css";
 
-const Login = () => {
-  const emailRef = useRef();
-  const passRef = useRef();
-  const history = useHistory();
+const ResetPass = () => {
   const [isLoading, setLoading] = useState(false);
-  const cxt=useContext(AuthContext);
-
-  const onSign=()=>{
-    history.replace('/SignUp');
-  }
-
+  const emailRef = useRef();
+  const history = useHistory();
   const sumbitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
       const res = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA9lLIJ70sceZJlxaMyrLjucZ-tMTKALK0",
+        "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyA9lLIJ70sceZJlxaMyrLjucZ-tMTKALK0",
         {
           method: "POST",
           body: JSON.stringify({
+            requestType:'PASSWORD_RESET',
             email: emailRef.current.value,
-            password: passRef.current.value,
-            returnSecureToken: true,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -35,8 +26,10 @@ const Login = () => {
 
       if (res.ok) {
         const data = await res.json();
-        cxt.addId(data.idToken);
-        history.replace("/Home");
+        console.log(data);
+        
+        alert("Check Your E-Mail Inbox, Password Reset Email has been send");
+        history.replace("/Login");
       } else {
         const data = await res.json();
         alert(data.error.message);
@@ -47,35 +40,26 @@ const Login = () => {
     setLoading(false);
   };
 
-
-  const resetHandler=()=>{
-    history.replace('/ResetPassword');
-  }
+  const onSign = () => {
+    history.replace("/Login");
+  };
 
   return (
     <center className={classes.center}>
       <div className={classes.SignUp}>
-        <h2>Login</h2>
+        <h2>Reset Password</h2>
         <form onSubmit={sumbitHandler}>
           <input ref={emailRef} type="email" placeholder="E-mail" required />
           <br />
-          <input
-            ref={passRef}
-            type="password"
-            placeholder="Password"
-            required
-          />
-          <br />
-          <button>Login</button>
-          <p onClick={resetHandler}>Forgot Password</p>
+          <button>Send Link</button>
         </form>
       </div>
       {isLoading && <p>Loading...</p>}
       <div onClick={onSign} className={classes.login}>
-        <p>I don't have an account ? SignUp</p>
+        <p>Back to Login</p>
       </div>
     </center>
   );
 };
 
-export default Login;
+export default ResetPass;

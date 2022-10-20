@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Auth/Login";
+import ResetPass from "./components/Auth/ResetPass";
 import SignUp from "./components/Auth/SignUp";
 import Header from "./components/header/Header";
 import Home from "./components/Home/Home";
@@ -27,6 +28,11 @@ function App() {
         {!cxt.isLogin && (
           <Route path={"/SignUp"}>
             <SignUp />
+          </Route>
+        )}
+        {!cxt.isLogin && (
+          <Route path={"/ResetPassword"}>
+            <ResetPass />
           </Route>
         )}
         {!cxt.isLogin && (

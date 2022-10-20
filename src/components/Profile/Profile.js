@@ -28,10 +28,8 @@ const Profile = () => {
 
         if (res.ok) {
           const data = await res.json();
-          if (!data.users[0].displayName === undefined) {
-            nameRef.current.value = data.users[0].displayName;
-            photoRef.current.value = data.users[0].photoUrl;
-          }
+          nameRef.current.value = data.users[0].displayName;
+          photoRef.current.value = data.users[0].photoUrl;
         } else {
           const data = await res.json();
           alert(data.error.message);
@@ -97,7 +95,7 @@ const Profile = () => {
       if (res.ok) {
         const data = await res.json();
         console.log(data);
-        alert('Check Your E-Mail Inbox, verification has been send');
+        alert("Check Your E-Mail Inbox, verification has been send");
       } else {
         const data = await res.json();
         alert(data.error.message);
