@@ -28,8 +28,10 @@ const Profile = () => {
 
         if (res.ok) {
           const data = await res.json();
-          nameRef.current.value = data.users[0].displayName;
-          photoRef.current.value = data.users[0].photoUrl;
+          if (!data.users[0].displayName === undefined) {
+            nameRef.current.value = data.users[0].displayName;
+            photoRef.current.value = data.users[0].photoUrl;
+          }
         } else {
           const data = await res.json();
           alert(data.error.message);
@@ -74,6 +76,37 @@ const Profile = () => {
     }
   };
 
+  const verifyHandler = async () => {
+    const val = {
+      requestType: "VERIFY_EMAIL",
+      idToken: cxt.id,
+    };
+
+    try {
+      const res = await fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyA9lLIJ70sceZJlxaMyrLjucZ-tMTKALK0",
+        {
+          method: "POST",
+          body: JSON.stringify(val),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+        alert('Check Your E-Mail Inbox, verification has been send');
+      } else {
+        const data = await res.json();
+        alert(data.error.message);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div className={classes.profile}>
       <div>
@@ -82,6 +115,9 @@ const Profile = () => {
           <button> Cancle</button>
         </Link>
       </div>
+      <span className={classes.verify}>
+        <button onClick={verifyHandler}>Verify Email</button>
+      </span>
       <form onSubmit={submitHandler}>
         <span>
           <label>Full Name -</label>

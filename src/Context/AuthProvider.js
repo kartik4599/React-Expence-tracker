@@ -44,6 +44,7 @@ const AuthProvider = (props) => {
 
   useEffect(()=>{
     const hasLogin=localStorage.getItem('login');
+    console.log(hasLogin);
     if(hasLogin){
         setAuth({ type: "Add", id: hasLogin });
     }

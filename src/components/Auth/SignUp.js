@@ -38,6 +38,7 @@ const SignUp = () => {
           const data = await res.json();
           console.log(data);
           console.log("Successfully Acreated Account");
+          history.replace('/Login');
         } else {
           const data = await res.json();
           alert(data.error.message);
