@@ -35,7 +35,11 @@ const Login = () => {
 
       if (res.ok) {
         const data = await res.json();
-        cxt.addId(data.idToken);
+        const send = {
+          id: data.idToken,
+          email: emailRef.current.value,
+        };
+        cxt.addId(send);
         history.replace("/Home");
       } else {
         const data = await res.json();

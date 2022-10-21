@@ -13,6 +13,7 @@ const ExpenseForm = (props) => {
       expense: expenseRef.current.value,
       description: descRef.current.value,
       category: catRef.current.value,
+      date:new Date()
     };
     console.log(obj);
     props.add(obj);

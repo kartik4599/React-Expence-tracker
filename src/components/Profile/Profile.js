@@ -94,7 +94,8 @@ const Profile = () => {
 
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
+        const id=data.email.split('@');
+        console.log(id);
         alert("Check Your E-Mail Inbox, verification has been send");
       } else {
         const data = await res.json();
