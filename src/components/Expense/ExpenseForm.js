@@ -13,12 +13,12 @@ const ExpenseForm = (props) => {
       expense: expenseRef.current.value,
       description: descRef.current.value,
       category: catRef.current.value,
-      date:new Date()
+      date: new Date(),
     };
     console.log(obj);
     props.add(obj);
   };
-  
+
   return (
     <Modal close={props.cancle}>
       <div className={classes.expense}>
@@ -29,13 +29,13 @@ const ExpenseForm = (props) => {
 
         <form onSubmit={subitHandler}>
           <label>Expense : </label>
-          <input ref={expenseRef} type="number" required/>
+          <input ref={expenseRef} type="number" id='Expense' required />
           <br />
           <label>Description : </label>
-          <input ref={descRef} type="text" required/>
+          <input ref={descRef} type="text" id='Description' required />
           <br />
           <label>Category : </label>
-          <input ref={catRef} list="category" required/>
+          <input ref={catRef} list="category" id='Category' required />
           <datalist id="category">
             <option value="Home"></option>
             <option value="Electricity"></option>

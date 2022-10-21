@@ -11,9 +11,7 @@ const Expense = () => {
   const formHandler = () => {
     setForm(!isForm);
   };
-  
-  const email= cxt.email.split('@');
-
+  const email = cxt.email.split("@");
   const url = `https://expense-tracker-3cb01-default-rtdb.asia-southeast1.firebasedatabase.app/${email[0]}.json`;
 
   const addHandler = async (obj) => {
@@ -26,11 +24,41 @@ const Expense = () => {
     if (res.ok) {
       const data = await res.json();
       console.log(data);
+      obj = { id: data.name, ...obj };
     } else {
       alert("Can't send your request to server");
     }
     setItem([obj, ...items]);
     setForm(!isForm);
+  };
+
+  const updateHandler = async (id) => {
+    setForm(true);
+    let newUrl = url.split(".json")[0];
+    newUrl = newUrl + `/${id}.json`;
+    const res = await fetch(newUrl);
+    const newObj = await res.json();
+    console.log(newObj);
+    await setTimeout(null,1000);
+    document.getElementById("Expense").value=newObj.expense;
+    document.getElementById("Description").value=newObj.description;
+    document.getElementById("Category").value=newObj.category;
+    deleteHandler(id);
+  };
+  const deleteHandler = async (id) => {
+    console.log(id);
+    const ar = items.filter((element) => {
+      return element.id !== id;
+    });
+    setItem(ar);
+    let newUrl = url.split(".json")[0];
+    newUrl = newUrl + `/${id}.json`;
+
+    const res = await fetch(newUrl, {
+      method: "DELETE",
+    });
+
+    console.log(res);
   };
 
   useEffect(() => {
@@ -44,6 +72,7 @@ const Expense = () => {
           description: getData[key].description,
           category: getData[key].category,
           date: new Date(getData[key].date),
+          id: key,
         };
         pushArray.push(obj);
       }
@@ -65,6 +94,8 @@ const Expense = () => {
         cat={element.category}
         no={i + 1}
         date={element.date}
+        upt={updateHandler.bind(this, element.id)}
+        dtl={deleteHandler.bind(this, element.id)}
       />
     );
   });
