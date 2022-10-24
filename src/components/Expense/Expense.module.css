@@ -8,7 +8,7 @@
 .getForm button {
   padding: 15px 50px;
   border: none;
-  margin: 10px;
+  margin-top: 10px;
   transition: 0.5s;
   border-radius: 10px;
   color: white;
@@ -25,12 +25,37 @@
   transform: translate(-50%, -50%);
 }
 
-.expenseList{
-    padding: 20px;
+.expenseList {
+  padding: 0px 20px;
+  font-size: 20px;
 }
 
-.expenseList span{
-    padding: 10px 40px;
-    font-weight: bold;
-    font-size: 30px;
+.expenseList span {
+  padding: 10px 40px;
+  padding-bottom: 30px;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  justify-content: space-between;
+}
+
+.footer button {
+  border: 2px solid purple;
+  color: purple;
+  font-weight: bold;
+  padding: 10px 40px;
+  margin: 10px 0px;
+  border-radius: 20px;
+  background: none;
+  cursor: pointer;
+}
+
+.footer button:hover {
+  background: purple;
+  color: white;
 }

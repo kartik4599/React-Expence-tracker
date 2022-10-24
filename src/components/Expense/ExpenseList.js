@@ -18,7 +18,7 @@ const ExpenseList = (props) => {
       </div>
       <span className={classes.btn}>
         <button onClick={props.upt} className={classes.upt}>Update</button>
-        <button onClick={props.dtl} className={classes.dtl}>delete</button>
+        <button onClick={props.dtl} className={classes.dtl}>Delete</button>
       </span>
     </div>
   );

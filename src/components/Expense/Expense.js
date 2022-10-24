@@ -1,17 +1,18 @@
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "../../Context/auth-context";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import classes from "./Expense.module.css";
 import ExpenseForm from "./ExpenseForm";
 import ExpenseList from "./ExpenseList";
 
 const Expense = () => {
-  const cxt = useContext(AuthContext);
   const [isForm, setForm] = useState(false);
   const [items, setItem] = useState([]);
   const formHandler = () => {
     setForm(!isForm);
   };
-  const email = cxt.email.split("@");
+  const Auth = useSelector((state) => state.auth);
+  let prime = false;
+  const email = Auth.email.split("@");
   const url = `https://expense-tracker-3cb01-default-rtdb.asia-southeast1.firebasedatabase.app/${email[0]}.json`;
 
   const addHandler = async (obj) => {
@@ -39,10 +40,9 @@ const Expense = () => {
     const res = await fetch(newUrl);
     const newObj = await res.json();
     console.log(newObj);
-    await setTimeout(null,1000);
-    document.getElementById("Expense").value=newObj.expense;
-    document.getElementById("Description").value=newObj.description;
-    document.getElementById("Category").value=newObj.category;
+    document.getElementById("Expense").value = newObj.expense;
+    document.getElementById("Description").value = newObj.description;
+    document.getElementById("Category").value = newObj.category;
     deleteHandler(id);
   };
   const deleteHandler = async (id) => {
@@ -86,6 +86,9 @@ const Expense = () => {
 
   const list = items.map((element, i) => {
     totalAmount += parseInt(element.expense);
+    if (totalAmount >= 10000) {
+      prime = true;
+    }
     return (
       <ExpenseList
         key={i}
@@ -115,7 +118,10 @@ const Expense = () => {
         <h2>Expense List</h2>
         <div>
           {list}
-          <span>Total Amount - ${totalAmount}</span>
+          <div className={classes.footer}>
+            <span>Total Amount - ${totalAmount}</span>
+            {prime && <button>Activate Premium </button>}
+          </div>
         </div>
       </div>
     </div>

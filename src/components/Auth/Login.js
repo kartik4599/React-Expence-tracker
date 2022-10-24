@@ -1,6 +1,7 @@
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import AuthContext from "../../Context/auth-context";
+import { authAction } from "../../Context/auth-redux";
 import classes from "./SignUp.module.css";
 
 const Login = () => {
@@ -8,11 +9,11 @@ const Login = () => {
   const passRef = useRef();
   const history = useHistory();
   const [isLoading, setLoading] = useState(false);
-  const cxt=useContext(AuthContext);
+  const dispatch = useDispatch();
 
-  const onSign=()=>{
-    history.replace('/SignUp');
-  }
+  const onSign = () => {
+    history.replace("/SignUp");
+  };
 
   const sumbitHandler = async (e) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ const Login = () => {
           id: data.idToken,
           email: emailRef.current.value,
         };
-        cxt.addId(send);
+        dispatch(authAction.login(send));
         history.replace("/Home");
       } else {
         const data = await res.json();
@@ -51,10 +52,9 @@ const Login = () => {
     setLoading(false);
   };
 
-
-  const resetHandler=()=>{
-    history.replace('/ResetPassword');
-  }
+  const resetHandler = () => {
+    history.replace("/ResetPassword");
+  };
 
   return (
     <center className={classes.center}>

@@ -24,7 +24,7 @@ const ExpenseForm = (props) => {
       <div className={classes.expense}>
         <span>
           <h2>Add Expense</h2>
-          <button onClick={props.cancle}>close</button>
+          <button onClick={props.cancle}>Close</button>
         </span>
 
         <form onSubmit={subitHandler}>
