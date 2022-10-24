@@ -1,9 +1,10 @@
+import { useSelector } from "react-redux";
 import classes from "./ExpenseList.module.css";
 
 const ExpenseList = (props) => {
-
+  const theme = useSelector((state) => state.dark.isDark);
   return (
-    <div className={classes.list}>
+    <div className={!theme ? classes.list:classes.darklist}>
       <div>
         <h2>
           {props.no}. {props.desc}
@@ -17,8 +18,12 @@ const ExpenseList = (props) => {
         <p>${props.expense}</p>
       </div>
       <span className={classes.btn}>
-        <button onClick={props.upt} className={classes.upt}>Update</button>
-        <button onClick={props.dtl} className={classes.dtl}>Delete</button>
+        <button onClick={props.upt} className={classes.upt}>
+          Update
+        </button>
+        <button onClick={props.dtl} className={classes.dtl}>
+          Delete
+        </button>
       </span>
     </div>
   );

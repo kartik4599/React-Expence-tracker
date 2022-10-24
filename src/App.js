@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
-import "./App.css";
+import classes from "./App.module.css"; 
 import Login from "./components/Auth/Login";
 import ResetPass from "./components/Auth/ResetPass";
 import SignUp from "./components/Auth/SignUp";
@@ -12,6 +12,7 @@ import { authAction } from "./Context/auth-redux";
 
 function App() {
   const Auth = useSelector((state) => state.auth);
+  const Theme = useSelector((state) => state.dark.isDark);
   const dispatch = useDispatch();
   useEffect(() => {
     const login = localStorage.getItem("login");
@@ -21,7 +22,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className={!Theme ? classes.light:classes.dark }>
       <Header />
       <Switch>
         {Auth.isLogin && (

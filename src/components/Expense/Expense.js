@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { DarkAction } from "../../Context/dark-redux";
 import classes from "./Expense.module.css";
 import ExpenseForm from "./ExpenseForm";
 import ExpenseList from "./ExpenseList";
@@ -7,6 +9,9 @@ import ExpenseList from "./ExpenseList";
 const Expense = () => {
   const [isForm, setForm] = useState(false);
   const [items, setItem] = useState([]);
+  const [isPrime, setPrime] = useState(false);
+  const theme = useSelector((state) => state.dark.isDark);
+  const dispatch = useDispatch();
   const formHandler = () => {
     setForm(!isForm);
   };
@@ -46,7 +51,6 @@ const Expense = () => {
     deleteHandler(id);
   };
   const deleteHandler = async (id) => {
-    console.log(id);
     const ar = items.filter((element) => {
       return element.id !== id;
     });
@@ -59,6 +63,26 @@ const Expense = () => {
     });
 
     console.log(res);
+  };
+
+  const themeHandler = () => {
+    dispatch(DarkAction.toggle());
+  };
+
+  const primehandler = () => {
+    setPrime(true);
+  };
+
+  const downloadHandler = () => {
+    const arr = [["Description", "Category", "Expense"]];
+    items.forEach((element) => {
+      arr.push([element.description, element.category, element.expense]);
+    });
+    let csvContent =
+      "data:text/csv;charset=utf-8," + arr.map((e) => e.join(",")).join("\n");
+    let encodedUri = encodeURI(csvContent);
+    const download = document.getElementById("download");
+    download.setAttribute('href',encodedUri)
   };
 
   useEffect(() => {
@@ -105,9 +129,8 @@ const Expense = () => {
 
   return (
     <div>
-      <div className={classes.getForm}>
-        {!isForm && <button onClick={formHandler}>Add Expense</button>}
-        {isForm && <button onClick={formHandler}>Remove Form</button>}
+      <div className={!theme ? classes.getForm : classes.darkgetForm}>
+        <button onClick={formHandler}>Add Expense</button>
         {isForm && (
           <span>
             <ExpenseForm add={addHandler} cancle={formHandler} />
@@ -115,12 +138,23 @@ const Expense = () => {
         )}
       </div>
       <div className={classes.expenseList}>
-        <h2>Expense List</h2>
+        <div className={!theme ? classes.topper : classes.darktopper}>
+          <h2>Expense List</h2>
+          {isPrime && (
+            <span>
+              <a id="download" download={"Expense.csv"}>
+                <button onClick={downloadHandler}>Download</button>
+              </a>
+              {!theme && <button onClick={themeHandler}>Dark Theme</button>}
+              {theme && <button onClick={themeHandler}>Light Theme</button>}
+            </span>
+          )}
+        </div>
         <div>
           {list}
           <div className={classes.footer}>
             <span>Total Amount - ${totalAmount}</span>
-            {prime && <button>Activate Premium </button>}
+            {prime && <button onClick={primehandler}>Activate Premium </button>}
           </div>
         </div>
       </div>

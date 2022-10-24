@@ -2,7 +2,22 @@
   width: 100%;
   text-align: center;
   margin: 50px 0px;
-  transition: 3s;
+}
+
+.darkgetForm {
+  width: 100%;
+  text-align: center;
+  margin: 50px 0px;
+}
+
+.darkgetForm button{
+  padding: 15px 50px;
+  border: none;
+  margin-top: 10px;
+  transition: 0.5s;
+  border-radius: 10px;
+  color: white;
+  background: rgb(32, 0, 84);
 }
 
 .getForm button {
@@ -57,5 +72,45 @@
 
 .footer button:hover {
   background: purple;
+  color: white;
+}
+
+.topper {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.darktopper{
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.darktopper button{
+  border: 1px solid white;
+  color: white;
+  padding: 10px 40px;
+  margin: 0px 5px;
+  border-radius: 20px;
+  background: none;
+}
+
+.darktopper button:hover{
+  background: white;
+  color: black;
+}
+
+.topper button {
+  border: 1px solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  padding: 10px 40px;
+  margin: 0px 5px;
+  border-radius: 20px;
+  background: none;
+}
+
+.topper button:hover {
+  background: rgb(0, 0, 0);
   color: white;
 }

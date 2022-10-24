@@ -4,15 +4,27 @@
   margin: 0px auto;
 }
 
+.darkexpense {
+  background: black;
+  border-radius: 20px;
+  margin: 0px auto;
+}
 
-.expense span{
+.expense span {
   display: flex;
   padding: 0px 20px;
   align-items: center;
   justify-content: space-between;
 }
 
-.expense span button{
+.darkexpense span {
+  display: flex;
+  padding: 0px 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.expense span button {
   padding: 12px 50px;
   border: 2px solid red;
   margin: 10px;
@@ -23,7 +35,24 @@
   background: none;
 }
 
-.expense span button:hover{
+.darkexpense span button {
+  padding: 12px 50px;
+  border: 2px solid red;
+  margin: 10px;
+  transition: 0.5s;
+  font-size: 15px;
+  border-radius: 10px;
+  color: red;
+  background: none;
+}
+
+.expense span button:hover {
+  border-radius: 40px;
+  background: red;
+  color: white;
+}
+
+.darkexpense span button:hover {
   border-radius: 40px;
   background: red;
   color: white;
@@ -34,9 +63,20 @@
   text-align: left;
 }
 
+.darkexpense form {
+  margin-left: 40px;
+  text-align: left;
+}
+
 .expense form label {
   font-size: 20px;
   color: rgb(62, 62, 62);
+  font-weight: bold;
+}
+
+.darkexpense form label {
+  font-size: 20px;
+  color: white;
   font-weight: bold;
 }
 
@@ -51,6 +91,17 @@
   border: 2px solid rgb(43, 160, 255);
 }
 
+.darkexpense form input {
+  width: 60%;
+  margin: 20px 10px;
+  font-size: 16px;
+  background: rgb(80, 80, 80);
+  color: white;
+  font-weight: bold;
+  padding: 10px 10px;
+  border-radius: 20px;
+}
+
 .expense form input:hover {
   background: rgb(202, 231, 255);
 }
@@ -63,9 +114,23 @@
   border-radius: 10px;
   color: white;
   background: red;
-  /* padding: 12px 60px; */
 }
 
+.darkexpense form button {
+  padding: 15px 60px;
+  border: none;
+  margin: 10px;
+  transition: 0.5s;
+  border-radius: 10px;
+  color: white;
+  background: red;
+}
+
+
 .expense form button:hover {
+  border-radius: 40px;
+}
+
+.darkexpense form button:hover {
   border-radius: 40px;
 }
